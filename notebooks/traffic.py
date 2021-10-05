@@ -1,34 +1,47 @@
 import requests
 import matplotlib.pyplot as plt
 
-# Your_Api_Key = 'a2cvZL5Hn6VUHWOBOJYMKnqD3122VWnY'
-# site_url = 'https://api.tomtom.com/traffic/services/5/incidentDetails?key=a2cvZL5Hn6VUHWOBOJYMKnqD3122VWnY&bbox=4.8854592519716675,52.36934334773164,4.897883244144765,52.37496348620152'
 plt.style.use('seaborn')
 
-site_url = 'https://api.tomtom.com/traffic/services/5/incidentDetails?key=a2cvZL5Hn6VUHWOBOJYMKnqD3122VWnY&bbox=4.8854592519716675,52.36934334773164,4.897883244144765,52.37496348620152&fields={incidents{type,geometry{type,coordinates},properties{id,iconCategory,magnitudeOfDelay,events{description,code,iconCategory},startTime,endTime,from,to,length,delay,roadNumbers,timeValidity,aci{probabilityOfOccurrence,numberOfReports,lastReportTime},tmc{countryCode,tableNumber,tableVersion,direction,points{location,offset}}}}}&language=en-GB&t=1633421340&categoryFilter=0,1,2,3,4,5,6,7,8,9,10,11,14&timeValidityFilter=present'
 
-response = requests.get(site_url)
-response_json = response.json()
+API_KEY = 'a2cvZL5Hn6VUHWOBOJYMKnqD3122VWnY'
+base_url = 'api.tomtom.com'
+param_fields = '{incidents{type,geometry{type,coordinates},properties{id,iconCategory,magnitudeOfDelay,events{description,code,iconCategory},startTime,endTime,from,to,length,delay,roadNumbers,timeValidity,aci{probabilityOfOccurrence,numberOfReports,lastReportTime},tmc{countryCode,tableNumber,tableVersion,direction,points{location,offset}}}}}'
+
+api_url = f'https://{base_url}/traffic/services/5/incidentDetails?key={API_KEY}&bbox=4.8854592519716675,52.36934334773164,4.897883244144765,52.37496348620152&fields={param_fields}&language=en-GB&t=1633435700&categoryFilter=0,1,2,3,4,5,6,7,8,9,10,11,14&timeValidityFilter=present'
+
+data = requests.get(api_url).json()
+# print(data)
+
+traffic_data = data['incidents'][0]
+traffic_property = traffic_data['properties']
+
+startTime = traffic_property['startTime']
+endTime = traffic_property['endTime']
+delay = traffic_property['delay']
+
+print(startTime)
+print(endTime)
+print(delay)
+
+param_fields = '{incidents{type,geometry{type,coordinates},properties{id,iconCategory,magnitudeOfDelay,startTime,endTime,from,to,length,delay,timeValidity}}}'
 
 
-print(response_json)
-incident = response_json['incidents'][0]
-# print(incident)
+# print(traffic_property)
 
-property = incident['properties']
 
-traffic_level, traffic_time = [],[]
-for item in property:
-    traffic_level.append(item['delay'])
-    traffic_time.append(item['startTime'])
+# traffic_level, traffic_time = [],[]
+# for item in traffic_data:
+#     traffic_level.append(item[3])
+#     traffic_time.append(item[2])
+#
+# traffic_level
+# traffic_time
 
-plt.barh(traffic_level, traffic_time)
+# plt.barh(traffic_level, traffic_time)
 
-plt.title('Traffic Levels from Hartenstraat to Raadhuisstraat')
-plt.xlabel('Time in the last 24hrs')
+# plt.title('Traffic Levels from Hartenstraat to Raadhuisstraat')
+# plt.xlabel('Time in the last 24hrs')
 
-plt.tight_layout()
-plt.show()
-
-# print(incident['properties'])
-response.status_code
+# plt.tight_layout()
+# plt.show()
