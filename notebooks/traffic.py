@@ -15,6 +15,15 @@ site_url = 'https://api.tomtom.com/traffic/services/5/incidentDetails?key=Your_A
 startTime,endTime,from,to,length,delay,roadNumbers,timeValidity,aci{probabilityOfOccurrence,numberOfReports,lastReportTime},tmc{countryCode,tableNumber,\
 tableVersion,direction,points{location,offset}}}}}&language=en-GB&t=1111&categoryFilter=6&timeValidityFilter=present'
 
+site_url = 'https://api.tomtom.com/traffic/services/5/incidentDetails?key=Your_Api_Key&bbox=4.8854592519716675,52.36934334773164,4.897883244144765,\
+52.37496348620152&fields={incidents{type,geometry{type,coordinates},properties{id,iconCategory,magnitudeOfDelay,events{description,code,iconCategory},\
+startTime,endTime,from,to,length,delay,roadNumbers,timeValidity,aci{probabilityOfOccurrence,numberOfReports,lastReportTime},tmc{countryCode,tableNumber,\
+tableVersion,direction,points{location,offset}}}}}&language=en-GB&t=1111&categoryFilter=6&timeValidityFilter=present'
+
+site_url = 'https://api.tomtom.com/traffic/services/5/incidentDetails?key=Your_Api_Key&bbox=4.8854592519716675,52.36934334773164,4.897883244144765,52.37496348620152&fields={incidents{type,geometry{type,coordinates},properties{id,iconCategory,magnitudeOfDelay,events{description,code,iconCategory},startTime,endTime,from,to,length,delay,roadNumbers,timeValidity,aci{probabilityOfOccurrence,numberOfReports,lastReportTime},tmc{countryCode,tableNumber,tableVersion,direction,points{location,offset}}}}}&language=en-GB&t=1111&categoryFilter=8&timeValidityFilter=present'
+
+
+
     {
       "incidents" : [
         {
